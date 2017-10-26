@@ -53,6 +53,8 @@ class Domain_Model:
 	# NITIN : NOTE : Define relations between element
 	def defineRelation(self, _id, _start, _end, RelationType = "Association"):
 		if _id in self.Relations : return
+
+		# NITIN : TODO : handle exceptions without stopping execution of program
 		if not self.ElementDirectory.has_key(_start) : raise e.SimpleException("Starting Element of relation not defined, startId : " + _start)
 		if not self.ElementDirectory.has_key(_end) : raise e.SimpleException("Ending Element of relation not defined, startId : " + _end)
 
