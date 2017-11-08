@@ -1,0 +1,95 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Executable Domain Modeling</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/stylesem.css') }}"></link>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.css">
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='js/actions.js') }}"></script>
+  </head>
+
+  <body>
+    <div class="ui three item menu">
+      <a class="active item item1">Description</a>
+      <a class="item item2">REST API</a>
+      <a class="item item3">Server Status</a>
+    </div>
+
+
+  <div class='Description'>
+    <div class="ui bulleted list">
+    <div class="item">
+      <div>Database Name:</div>
+      <div class="list">
+        <div class="item">MyDB</div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div>Collections created:</div>
+      <div class="list">
+        <div class="item">MyClass1</div>
+        <div class="item">MyClass2</div>
+      </div>
+    </div>
+
+    </div>
+  </div>
+
+  <div class="ui grid RESTAPI">
+  <div class="four wide column">
+    <div class="ui vertical fluid tabular menu">
+      <a class="item c1 active">
+        Create One
+      </a>
+      <a class="item c2">
+        Create Many
+      </a>
+      <a class="item r1">
+        Read One
+      </a>
+      <a class="item r2">
+        Read All
+      </a>
+      <a class="item upd">
+        Update
+      </a>
+      <a class="item del">
+        Delete
+      </a>
+    </div>
+  </div>
+  <div class="twelve wide stretched column">
+    <div class="ui segment crOne">
+      Create One
+    </div>
+
+    <div class="ui segment crMany" style="display: none;">
+      Create Many
+    </div>
+
+    <div class="ui segment readOne" style="display: none;">
+      Read One
+    </div>
+
+    <div class="ui segment readAll" style="display: none;">
+      Read All
+    </div>
+
+    <div class="ui segment update" style="display: none;">
+      Update
+    </div>
+
+    <div class="ui segment delete" style="display: none;">
+      Delete
+    </div>
+  </div>
+</div>
+
+  <div class='ServerStatus'>
+    ServerStatus
+  </div>
+
+  </body>
+
+</html>
