@@ -1,0 +1,15 @@
+{
+    "name": "wine-cellar",
+    "description": "Wine Cellar Application",
+    "version": "0.0.1",
+    "private": true,
+    "dependencies": {
+        "ajax-request": "^1.2.3",
+        "autoloader": "^2.1.0",
+        "express": "3.x",
+        "jquery": "^2.2.4",
+        "jsdom": "^11.3.0",
+        "mongodb": "^2.2.33",
+        "xmlhttprequest": "^1.8.0"
+    }
+}

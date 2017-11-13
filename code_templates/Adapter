@@ -1,5 +1,8 @@
 // Change the url as required
-var url = "http://45.55.3.71:9002/";
+
+var server_ip = $server_ip;
+var port = $port;
+var url = "http://"+server_ip+":"+port+"/";
 
 function is_defined(x) {
     return typeof x !== 'undefined';
@@ -21,17 +24,18 @@ var DBAdapter = {};
 // Example,
 // collection : "table1",
 // data : {"entity1" : 1}
-DBAdapter.createOne = function(collection, data, successCB, errorCB) {
-    if (is_defined(collection) && is_defined(data) && !is_array(data)) {
+DBAdapter.createOne = function(collection, data1) {
+    alert("Came here??");
+
+    alert(data1);
+
         var body = {
             collection : collection,
-            data : JSON.stringify(data)
+            data : JSON.stringify(data1)
         };
-        ajaxCall("create", body, successCB, errorCB);
-    } else {
-        // Error handling
-        errorCB("Error: " + "Invalid Parameters");
-    }
+
+        ajaxCall("create", body);
+
 };
 
 // CRUD: createMany.
@@ -142,7 +146,7 @@ DBAdapter.update = function(collection, data, successCB, errorCB) {
 // data : {"x" : [{"x":1111}, {"y":3333}]} or
 // data : {"y" : 2222} or
 // data : {"_id" : "57d26068f2a81b5d740f695c"}
-DBAdapter.delete = function(collection, data, successCB, errorCB) {
+DBAdapter.delete = function(collection, data) {
     if (is_defined(collection) && is_defined(data)) {
         var body;
         if (is_defined(data._id)) {
@@ -156,24 +160,26 @@ DBAdapter.delete = function(collection, data, successCB, errorCB) {
                 data : JSON.stringify(data)
             };
         }
-        ajaxCall("delete", body, successCB, errorCB);
+        ajaxCall("delete", body);
     } else {
         // Error handling
-        errorCB("Error: " + "Invalid Parameters");
+
     }
 };
 
-function ajaxCall(operation, body, successCB, errorCB) {
+function ajaxCall(operation, body) {
+    alert("Came in the ajax call");
     $.ajax({
         "url": url + operation,
         "method": "POST",
         "content-Type": "application/json; charset=utf-8",
         "data": body,
         "success": function(result){
-            successCB(result);
+        alert("Call succeeded");
+
         },
         "error":  function(xhr, ajaxOptions, thrownError) {
-            errorCB("Error: " + thrownError);
+
         }
     });
 }

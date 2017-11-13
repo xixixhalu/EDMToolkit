@@ -3,9 +3,9 @@
 /*
  Configure the variables below
  */
-var server_ip = '45.55.3.71';
-var keyspace = 'BDR';
-var server_port = 9001;
+var server_ip = $server_ip;
+var dbname = $dbname;
+var server_port = $port;
 //declare what is the primary key for the table specified above.
 var primary_key = '_id';
 
@@ -23,8 +23,7 @@ var ObjectId = mongodb.ObjectId;
  change the IP and keyspace so that it is according to your setting.
  */
 
-var db_server = 'localhost:27577';
-var url = 'mongodb://' + keyspace + ':' + keyspace + '@' + db_server + '/' + keyspace + '?authMechanism=DEFAULT&authSource=' + keyspace;
+var url = "mongodb://"+server_ip+":27017/"+dbname;
 var db;
 client.connect(url, function (err, database) {
     if (err) {
@@ -66,12 +65,14 @@ app.get('/', function (req, res) {
 
 // CRUD: Create
 app.post('/create', function (req, res) {
+
     if (typeof(req.body.collection) !== 'undefined' &&
         typeof(req.body.data) !== 'undefined') {
         var data = JSON.parse(req.body.data);
         if (Array.isArray(data)) {
             db.collection(req.body.collection).insertMany(data, {w:1}, function(err, result) {
                 if (err) {
+
                     res.sendStatus(500);
                 }
                 else {
@@ -81,6 +82,7 @@ app.post('/create', function (req, res) {
         } else {
             db.collection(req.body.collection).insertOne(data, {w:1}, function(err, result) {
                 if (err) {
+
                     res.sendStatus(500);
                 }
                 else {

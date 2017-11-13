@@ -1,22 +1,22 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*-
-import sys
-import os
-edm_root_dir = os.environ['EDM_ROOT_DIR']
-sys.path.append('edm_root_dir' + 'Backend')
 
 import os
-from Errors import exceptions as e
-from Parser.domain_model import Domain_Model
-from Parser import datatypes as dt
+from Backend.Errors import exceptions as e
+from Backend.Parser.domain_model import Domain_Model
+from Backend.Parser import datatypes as dt
 import xml.etree.ElementTree as ET
+
+output_filename = ""
 
 class analyzer:
 
     def xmiPrefixAppender(self, key, xmiPrefix):
         return '{' + xmiPrefix + '}' + key
 
-    def DM_File_Analyze(self,PROJECT_DIR, config):
+    def DM_File_Analyze(self,PROJECT_DIR, config, output_file):
+        global output_filename
+        output_filename = output_file
         if not os.path.exists(PROJECT_DIR):
             raise e.SimpleException("Project Home Directory not created, run project initialize first.")
         DM_File_type = config['DM_Input_type']
@@ -28,6 +28,7 @@ class analyzer:
 
 
     def SimpleXMLUtil(self,dmoFile, _dmoName):
+        global output_filename
         # NITIN : TODO : check how to handle namepspaces dynamically later
         namespaces = {"xmi_namespace": "http://schema.omg.org/spec/XMI/2.1"}
         myDMO = ET.parse(dmoFile)
@@ -83,7 +84,9 @@ class analyzer:
 
 
 
-        #print dmo.toString()
+        json_file = open("GeneratedCode/"+output_filename+".json", "w")
+        json_file.write(dmo.toJson())
+        json_file.close()
 
         return dmo.toJson()
 

@@ -1,9 +1,18 @@
 import json
+from Utilities import portScanner
+
+
+def get_server_info():
+    server_ip = "localhost"
+    port = portScanner.runPortScan(1000,9000)
+    return server_ip, port
 
 
 """This method parses json input and replaces the
 respective values in the template and generates the js file """
 def generate_model(json_data, template_filename):
+
+    element_names = []
     # read the template file as text
     model_template_file = open("code_templates/" + template_filename, "r").read()
 
@@ -12,9 +21,11 @@ def generate_model(json_data, template_filename):
             template_file_elem = model_template_file
             elem_name = element.get("elementName")
 
+            element_names.append(elem_name)
+
             #  create a js file with name as elem_name
             file_name = elem_name + ".js"
-            js_file = open("GeneratedCode/"+file_name, "w")
+            js_file = open("static/js/"+file_name, "w")
 
             # replace all $model with elem_name
             template_file_elem = template_file_elem.replace("$model", elem_name)
@@ -50,27 +61,36 @@ def generate_model(json_data, template_filename):
             #  closing resources
             js_file.close()
 
+    return element_names
+
 
 """ This method creates the adapter js file"""
-def generate_adapter(adapter_filename):
+def generate_adapter(adapter_filename, server_ip, port):
     adapter_template_file = open("code_templates/"+adapter_filename, "r").read()
-    adapter_code = open("GeneratedCode/Adapter.js", "w")
+    adapter_template_file = adapter_template_file.replace("$server_ip", "\""+server_ip+"\"")
+    adapter_template_file = adapter_template_file.replace("$port", "\""+port+"\"")
+    adapter_code = open("static/js/Adapter.js", "w")
     adapter_code.write(adapter_template_file)
     adapter_code.close()
 
 
 """ This method creates the server js file"""
-def generate_server(server_filename):
+def generate_server(server_filename, server_ip, port, db_name):
     server_template_file = open("code_templates/"+server_filename, "r").read()
-    server_code = open("GeneratedCode/Server.js", "w")
+    server_template_file = server_template_file.replace("$server_ip", "\""+server_ip+"\"")
+    server_template_file = server_template_file.replace("$port", "\""+port+"\"")
+    server_template_file = server_template_file.replace("$dbname", "\""+db_name+"\"")
+    server_code = open("static/js/Server.js", "w")
     server_code.write(server_template_file)
     server_code.close()
 
 
-if __name__ == "__main__":
+def generate_all(db_name):
     # reading json data
-    with open("input.json") as json_input:
+    with open("GeneratedCode/"+db_name+".json") as json_input:
         data = json.load(json_input)
-        generate_model(data, "Model")
-        generate_adapter("Adapter")
-        generate_server("Server")
+        server_ip, port = get_server_info()
+        element_names = generate_model(data, "Model")
+        generate_adapter("Adapter", str(server_ip), str(port))
+        generate_server("Server", str(server_ip), str(port), str(db_name))
+        return element_names

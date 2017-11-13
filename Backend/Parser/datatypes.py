@@ -1,9 +1,4 @@
-import sys
-import os
-edm_root_dir = os.environ['EDM_ROOT_DIR']
-sys.path.append('edm_root_dir' + 'Backend')
-
-from Errors import exceptions as e
+from Backend.Errors import exceptions as e
 
 
 # NITIN : NOTE : all elements types

@@ -1,11 +1,22 @@
 <html>
   <head>
+    <script>
+    function collect_values()
+    {
+      var collection_name = document.getElementById("cname").value;
+      var data = document.getElementById("data").value;
+      DBAdapter.createOne(collection_name, JSON.parse(data));
+
+     }
+    </script>
     <meta charset="utf-8">
     <title>Executable Domain Modeling</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/stylesem.css') }}"></link>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.css">
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
     <script type="text/javascript" src="{{ url_for('static',filename='js/actions.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='js/Adapter.js') }}"></script>
+
   </head>
 
   <body>
@@ -21,15 +32,16 @@
     <div class="item">
       <div>Database Name:</div>
       <div class="list">
-        <div class="item">MyDB</div>
+        <div class="item">{{ db_name }}</div>
       </div>
     </div>
 
     <div class="item">
       <div>Collections created:</div>
       <div class="list">
-        <div class="item">MyClass1</div>
-        <div class="item">MyClass2</div>
+        {% for collection_name in collection_names %}
+        <div class="item">{{ collection_name }}</div>
+        {% endfor %}
       </div>
     </div>
 
@@ -61,7 +73,9 @@
   </div>
   <div class="twelve wide stretched column">
     <div class="ui segment crOne">
-      Create One
+      Collection name : <input type="text" maxlength="20" id="cname"><br><br>
+      Data : <textarea id="data"></textarea><br>
+      <button onclick="collect_values()">Create One</button>
     </div>
 
     <div class="ui segment crMany" style="display: none;">

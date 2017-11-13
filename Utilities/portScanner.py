@@ -31,5 +31,6 @@ else:
     # runPortScan() function, it will return the first available port in the range,
     # typically we should always specify same range
     pass
-print result
+
+# print result
 

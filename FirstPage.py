@@ -1,10 +1,16 @@
 import os
 
+import GenerateCode
+
 from flask import flash
 from flask import render_template, Flask, request, redirect, url_for
 from werkzeug.utils import secure_filename
 
-UPLOAD_FOLDER = 'GeneratedCode'
+from Backend.Parser.parse_DM_File import analyzer as p
+
+ana = p()
+
+UPLOAD_FOLDER = 'Input'
 ALLOWED_EXTENSIONS = set(['xml'])
 
 app = Flask(__name__)
@@ -23,6 +29,7 @@ def index():
 
 @app.route('/result', methods=['GET', 'POST'])
 def result():
+    filename_str = ""
     if request.method == 'POST':
         # check if the post request has the file part
         if 'file' not in request.files:
@@ -36,18 +43,22 @@ def result():
             return redirect(request.url)
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
+            filename_str = filename.split(".")[0]
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
     #Parse XML and generate JSON
+    ana.DM_File_Analyze('Input', {'DM_Input_type': "Simple_XML"}, filename_str)
 
     #Parse JSON and generate code
-        #TODO: Generate DB name and port dynamically
-        #TODO: Decide what data is required for the REST API Page
+    element_names = GenerateCode.generate_all(filename_str)
 
     #Pass required data to the template
+    description_data = {"collection_names":element_names, "db_name":filename_str}
+
+    print description_data
 
     #Render the template
-    return render_template('result_page.html')
+    return render_template('result_page.html', **description_data)
 
 if __name__ == '__main__':
     app.run()
