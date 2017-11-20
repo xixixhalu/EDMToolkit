@@ -52,8 +52,18 @@ def result():
     #Parse JSON and generate code
     element_names = GenerateCode.generate_all(filename_str)
 
+    #Convert collection names to dictionary for ID to name mapping
+    dict_mapping = {}
+    id = 1
+
+    for element in element_names:
+        dict_mapping[id] = element
+        id+=1
+
+    print dict_mapping
+
     #Pass required data to the template
-    description_data = {"collection_names":element_names, "db_name":filename_str}
+    description_data = {"collection_names":dict_mapping, "db_name":filename_str}
 
     print description_data
 

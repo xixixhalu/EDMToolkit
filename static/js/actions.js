@@ -1,6 +1,11 @@
 $(function () {
   $('.RESTAPI').hide();
   $('.ServerStatus').hide();
+  $('.crMany').hide();
+  $('.readOne').hide();
+  $('.readAll').hide();
+  $('.update').hide();
+  $('.delete').hide();
 
   $('.item1').on("click",function () {
   	$('.item1').addClass("active");
@@ -118,5 +123,10 @@ $(function () {
   	$('.upd').removeClass("active");
   	$('.del').addClass("active");
   });
+
+  $('.ui .item .outermenu').on('click', function() {
+      $('.ui .item .outermenu').removeClass('active');
+      $(this).addClass('active');
+   });
 
 });

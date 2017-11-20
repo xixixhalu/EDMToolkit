@@ -44,17 +44,14 @@ DBAdapter.createOne = function(collection, data1) {
 // Example,
 // collection : "table1",
 // data : [{"entity1" : 1}, {"entity2" : 2}]
-DBAdapter.createMany = function(collection, data, successCB, errorCB) {
-    if (is_defined(collection) && is_defined(data) && is_array(data)) {
+DBAdapter.createMany = function(collection, data) {
+
         var body = {
             collection : collection,
             data : JSON.stringify(data)
         };
-        ajaxCall("create", body, successCB, errorCB);
-    } else {
-        // Error handling
-        errorCB("Error: " + "Invalid Parameters");
-    }
+        ajaxCall("create", body);
+
 };
 
 // CRUD: ReadOne.
@@ -64,8 +61,8 @@ DBAdapter.createMany = function(collection, data, successCB, errorCB) {
 // collection : "table1",
 // data : {"_id", "57d26068f2a81b5d740f695c"} or
 // data : {"x" : 1234}
-DBAdapter.readOne = function(collection, data, successCB, errorCB) {
-    if (is_defined(collection) && is_defined(data)) {
+DBAdapter.readOne = function(collection, data) {
+
         var body;
         if (is_defined(data._id)) {
             body = {
@@ -78,11 +75,7 @@ DBAdapter.readOne = function(collection, data, successCB, errorCB) {
                 data : JSON.stringify(data)
             };
         }
-        ajaxCall("readOne", body, successCB, errorCB);
-    } else {
-        // Error handling
-        errorCB("Error: " + "Invalid Parameters");
-    }
+        ajaxCall("readOne", body);
 };
 
 // CRUD: readAll.
@@ -91,17 +84,14 @@ DBAdapter.readOne = function(collection, data, successCB, errorCB) {
 // Example,
 // collection : "table1",
 // data : {"x" : 1234}
-DBAdapter.readAll = function(collection, body, successCB, errorCB) {
-    if (is_defined(collection) && is_defined(data)) {
+DBAdapter.readAll = function(collection, body) {
+
         var body = {
             collection : collection,
             data : JSON.stringify(data)
         };
-        ajaxCall("readAll", body, successCB, errorCB);
-    } else {
-        // Error handling
-        errorCB("Error: " + "Invalid Parameters");
-    }
+        ajaxCall("readAll", body);
+
 };
 
 // CRUD: update.
@@ -111,8 +101,8 @@ DBAdapter.readAll = function(collection, body, successCB, errorCB) {
 // collection : "table1",
 // data : {_id : "57d25c9cf2a81b5d740f6956", newData : {x:5678, y:2222}} or
 // data : {oldData: {y:2222}, newData : {z:5678, y:2222}}
-DBAdapter.update = function(collection, data, successCB, errorCB) {
-    if (is_defined(collection) && is_defined(data)) {
+DBAdapter.update = function(collection, data) {
+
         var body;
         if (is_defined(data._id) && is_defined(data.newData) && !is_array(data.newData)) {
             body = {
@@ -128,14 +118,9 @@ DBAdapter.update = function(collection, data, successCB, errorCB) {
                 newData: JSON.stringify(data.newData)
             };
         } else {
-            errorCB("Error: " + "Invalid Parameters");
             return;
         }
-        ajaxCall("update", body, successCB, errorCB);
-    } else {
-        // Error handling
-        errorCB("Error: " + "Invalid Parameters");
-    }
+        ajaxCall("update", body);
 };
 
 // CRUD: delete.
@@ -147,7 +132,7 @@ DBAdapter.update = function(collection, data, successCB, errorCB) {
 // data : {"y" : 2222} or
 // data : {"_id" : "57d26068f2a81b5d740f695c"}
 DBAdapter.delete = function(collection, data) {
-    if (is_defined(collection) && is_defined(data)) {
+
         var body;
         if (is_defined(data._id)) {
             body = {
@@ -161,10 +146,6 @@ DBAdapter.delete = function(collection, data) {
             };
         }
         ajaxCall("delete", body);
-    } else {
-        // Error handling
-
-    }
 };
 
 function ajaxCall(operation, body) {
@@ -176,6 +157,7 @@ function ajaxCall(operation, body) {
         "data": body,
         "success": function(result){
         alert("Call succeeded");
+        alert(JSON.stringify(result));
 
         },
         "error":  function(xhr, ajaxOptions, thrownError) {

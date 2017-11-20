@@ -132,9 +132,7 @@ app.post('/readAll', function (req, res) {
         return;
     }
     var data;
-    if (typeof(req.body.data) === 'undefined')
-        data = {};
-    else
+
         data = JSON.parse(req.body.data);
     db.collection(req.body.collection).find(data).toArray(function(err, result){
         if (err) {
