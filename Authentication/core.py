@@ -131,6 +131,7 @@ def registerUser(username):
 	validtill = create_expiry_object()
 	userprofile = { "username" : username , "key" : key , "validtill" : validtill}
 	db["authentication"].insert_one(userprofile)
+	db["history"].insert_one( {"username" : username , uploads = [] } ) 
 	response["status"] = "success"
 	response["response"] = {"message" : "Successfully registerd user, check the object in 'returnvalue' to get the key" , "returnvalue" : userprofile}
 	return jsonify(response)
@@ -165,8 +166,9 @@ def refreshtoken(username):
 	
 @app.route('/registerUpload/<string:username>/<string:dmName>' , methods = ['POST'])
 def upload(username, dmName):
-
-	f = request.files['modelfile']
+	pass
+	#f = request.files['modelfile']
+	#db["history"].update_one(filter = {"username" : username} , update = {'$push' : { dmName : f}} , upsert = True)
 
 	# NITIN : TODO : check how to save blobs to mongo
 
