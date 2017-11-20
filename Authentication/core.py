@@ -33,8 +33,32 @@ db = client["usermetadata"]
 Utility functions
 '''
 def setupandexit():
+	'''
+		db : usermetadata
+			collection : authentication :
+										{
+											username :
+											key :
+											validtill :
+										}
+			collection : history : 
+										{
+											username : 
+											uploads : 
+													{
+														domainModelName : 	[ 
+																				{	
+																					file : 
+																			 		date : 
+																				}
+																			]
+													}
+										}
+	'''
 	db.create_collection("authentication")
 	db["authentication"].create_index([('username',pymongo.ASCENDING)],unique=True)
+	db.create_collection("history")
+	db["history"].create_index([('username',pymongo.ASCENDING)],unique=True)
 
 def create_random_key():
 	return str(uuid.uuid4())
@@ -49,6 +73,7 @@ def create_expiry_object():
 '''
 Main Functionalities
 '''
+# NITIN : NOTE : assuming the user has same token for all his domain models, change later for an exclusive token for each domain model
 @app.route('/')
 def default():
 	response = {"status" : "success",\
@@ -56,6 +81,7 @@ def default():
 				1. /register/<username> [] [response of a token] \n\
 				2. /authenticate/<username> [send 'key' : key_value in header] [response of a authentication accept] \n\
 				3. /refreshtoken/<username> [send 'key' : key_value in header] [renew token and send back new]\n\
+				4. /registerUpload/<string:username>/<string:dmName> [send 'modelfile' : file] [get acknoledgement back]\n\
 				"}
 	return jsonify(response)
 
@@ -137,7 +163,12 @@ def refreshtoken(username):
 		response["response"] = "wrong old key, provide correct old key to refresh token"
 
 	
+@app.route('/registerUpload/<string:username>/<string:dmName>' , methods = ['POST'])
+def upload(username, dmName):
 
+	f = request.files['modelfile']
+
+	# NITIN : TODO : check how to save blobs to mongo
 
 
 
