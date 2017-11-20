@@ -152,7 +152,7 @@ function ajaxCall(operation, body) {
     alert("Came in the ajax call");
     $.ajax({
         "url": url + operation,
-        "method": "POST",
+        "method": "GET",
         "content-Type": "application/json; charset=utf-8",
         "data": body,
         "success": function(result){

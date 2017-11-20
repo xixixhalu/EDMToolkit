@@ -52,12 +52,14 @@ def result():
     #Parse JSON and generate code
     element_names = GenerateCode.generate_all(filename_str)
 
+    print element_names
+
     #Convert collection names to dictionary for ID to name mapping
     dict_mapping = {}
     id = 1
 
     for element in element_names:
-        dict_mapping[id] = element
+        dict_mapping[id] = [element, element_names[element]]
         id+=1
 
     print dict_mapping

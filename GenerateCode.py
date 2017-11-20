@@ -12,7 +12,7 @@ def get_server_info():
 respective values in the template and generates the js file """
 def generate_model(json_data, template_filename):
 
-    element_names = []
+    element_names = {}
     # read the template file as text
     model_template_file = open("code_templates/" + template_filename, "r").read()
 
@@ -20,8 +20,6 @@ def generate_model(json_data, template_filename):
         for element in json_data.get(model_name).get("elements"):
             template_file_elem = model_template_file
             elem_name = element.get("elementName")
-
-            element_names.append(elem_name)
 
             #  create a js file with name as elem_name
             file_name = elem_name + ".js"
@@ -32,12 +30,15 @@ def generate_model(json_data, template_filename):
             template_file_elem = template_file_elem.replace("$name", "\"" + elem_name + "\"")
 
             # Reading attributes from json
+            attribute_list = []
             attribute_str = ""
             for attribute in element.get("Attributes").get("Simple"):
                 attribute_name = attribute.get("name")
+                attribute_list.append(attribute_name)
                 attribute_str += "\"" + attribute_name + "\" ,\n"
             attribute_str = attribute_str[:-2]
 
+            element_names[elem_name] = attribute_list
             # replace $attributes with the attribute list
             template_file_elem = template_file_elem.replace("$attributes", attribute_str)
 

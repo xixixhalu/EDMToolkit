@@ -88,7 +88,7 @@
       <div>Collections created:</div>
       <div class="list">
         {% for id in collection_names %}
-        <div class="item">{{ collection_names[id] }}</div>
+        <div class="item">{{ collection_names[id][0] }}</div>
         {% endfor %}
       </div>
     </div>
@@ -102,7 +102,7 @@
 		<div class="ui inverted vertical menu" style="height:100%">
 		  {% for i in collection_names %}
           <a class="item outermenu" name={{collection_names[i]}} onclick="handle( {{i}} , {{collection_names|length}}, this )">
-			{{ collection_names[i] }}
+			{{ collection_names[i][0] }}
           </a>
           {% endfor %}
 		</div>
@@ -111,7 +111,7 @@
 
       {% for i in collection_names %}
       <div class = "inner-box" style="display:none" id="{{i}}">
-        {{collection_names[i]}}
+        {{collection_names[i][0]}}
         <div class="ui grid">
   <div class="four wide column">
     <div class="ui vertical fluid tabular menu">
@@ -139,17 +139,25 @@
     <div class="ui segment crOne">
       <!--Collection name : <input type="text" maxlength="20" id="cname"><br><br>-->
       Data : <textarea id="data{{i}}"></textarea><br>
-      <button name={{collection_names[i]}} onclick="collect_values(this, {{i}})">Create One</button>
+      <button name={{collection_names[i][0]}} onclick="collect_values(this, {{i}})">Create One</button>
       <br>
       Data must be specified <br>
       Example: <br>
-      data : {"entity1" : 1}
+      data : {
+      {% for w in range(collection_names[i][1]|length)%}
+        {% if w == collection_names[i][1]|length - 1 %}
+          "{{collection_names[i][1][w]}}" : "String"
+        {% else %}
+          "{{collection_names[i][1][w]}}" : "String" ,
+        {% endif %}
+      {% endfor %}
+      }
     </div>
 
     <div class="ui segment crMany">
       <!--Collection name : <input type="text" maxlength="20" id="cname1"><br><br>-->
       Data : <textarea id="data1{{i}}"></textarea><br>
-      <button name={{collection_names[i]}}  onclick="collect_values1(this, {{i}})">Create Many</button>
+      <button name={{collection_names[i][0]}}  onclick="collect_values1(this, {{i}})">Create Many</button>
       <br>
       Data must be specified <br>
       Example: <br>
@@ -159,7 +167,7 @@
     <div class="ui segment readOne">
       <!--Collection name : <input type="text" maxlength="20" id="cname2"><br><br>-->
       Data : <textarea id="data2{{i}}"></textarea><br>
-      <button name={{collection_names[i]}} onclick="collect_values2(this, {{i}})">Read One</button>
+      <button name={{collection_names[i][0]}} onclick="collect_values2(this, {{i}})">Read One</button>
       <br>
       Data must be specified <br>
       Example: <br>
@@ -170,7 +178,7 @@
     <div class="ui segment readAll">
       <!--Collection name : <input type="text" maxlength="20" id="cname3"><br><br>-->
       Data : <textarea id="data3{{i}}"></textarea><br>
-      <button name={{collection_names[i]}} onclick="collect_values3(this, {{i}})">Read All</button>
+      <button name={{collection_names[i][0]}} onclick="collect_values3(this, {{i}})">Read All</button>
       <br>
       Data must be specified <br>
       Example: <br>
@@ -180,7 +188,7 @@
     <div class="ui segment delete">
       <!--Collection name : <input type="text" maxlength="20" id="cname4"><br><br>-->
       Data : <textarea id="data4{{i}}"></textarea><br>
-      <button name={{collection_names[i]}} onclick="collect_values4(this, {{i}})">Delete</button>
+      <button name={{collection_names[i][0]}} onclick="collect_values4(this, {{i}})">Delete</button>
       <br>
       Data must be specified <br>
       Example: <br>
@@ -192,7 +200,7 @@
     <div class="ui segment update">
       <!--Collection name : <input type="text" maxlength="20" id="cname5"><br><br>-->
       Data : <textarea id="data5{{i}}"></textarea><br>
-      <button name={{collection_names[i]}} onclick="collect_values5(this, {{i}})">Update</button>
+      <button name={{collection_names[i][0]}} onclick="collect_values5(this, {{i}})">Update</button>
       <br>
       Data must be specified <br>
       Example: <br>
