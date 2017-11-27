@@ -94,4 +94,4 @@ def generate_all(db_name):
         element_names = generate_model(data, "Model")
         generate_adapter("Adapter", str(server_ip), str(port))
         generate_server("Server", str(server_ip), str(port), str(db_name))
-        return element_names
+        return element_names, server_ip + ":" +str(port)

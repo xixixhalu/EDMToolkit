@@ -93,6 +93,13 @@
       </div>
     </div>
 
+    <div class="item">
+      <div>Server URL:</div>
+      <div class="list">
+        <div class="item">{{ server_url }}</div>
+      </div>
+    </div>
+
     </div>
   </div>
 
@@ -151,7 +158,8 @@
           "{{collection_names[i][1][w]}}" : "String" ,
         {% endif %}
       {% endfor %}
-      }
+      } <br>
+      REST API URL : {{server_url}}/create
     </div>
 
     <div class="ui segment crMany">
@@ -161,18 +169,37 @@
       <br>
       Data must be specified <br>
       Example: <br>
-      data : [{"entity1" : 1}, {"entity2" : 2}]
+      data : [ {
+      {% for w in range(collection_names[i][1]|length)%}
+        {% if w == collection_names[i][1]|length - 1 %}
+          "{{collection_names[i][1][w]}}" : "String"
+        {% else %}
+          "{{collection_names[i][1][w]}}" : "String" ,
+        {% endif %}
+      {% endfor %}
+      },
+      {
+      {% for w in range(collection_names[i][1]|length)%}
+        {% if w == collection_names[i][1]|length - 1 %}
+          "{{collection_names[i][1][w]}}" : "String"
+        {% else %}
+          "{{collection_names[i][1][w]}}" : "String" ,
+        {% endif %}
+      {% endfor %}
+      }
+      ]<br>
+      REST API URL : {{server_url}}/create
     </div>
 
     <div class="ui segment readOne">
-      <!--Collection name : <input type="text" maxlength="20" id="cname2"><br><br>-->
       Data : <textarea id="data2{{i}}"></textarea><br>
       <button name={{collection_names[i][0]}} onclick="collect_values2(this, {{i}})">Read One</button>
       <br>
       Data must be specified <br>
       Example: <br>
       data : {"_id", "57d26068f2a81b5d740f695c"} or <br>
-      data : {"x" : 1234}
+      data : { "{{collection_names[i][1][0]}}" : "Some value" } <br>
+      REST API URL : {{server_url}}/readOne
     </div>
 
     <div class="ui segment readAll">
@@ -182,7 +209,8 @@
       <br>
       Data must be specified <br>
       Example: <br>
-      data : {"x" : 1234}
+      data : { "{{collection_names[i][1][0]}}" : "Some value" } <br>
+      REST API URL : {{server_url}}/readAll
     </div>
 
     <div class="ui segment delete">
@@ -192,9 +220,9 @@
       <br>
       Data must be specified <br>
       Example: <br>
-      data : {"x" : [{"x":1111}, {"y":3333}]} or <br>
-      data : {"y" : 2222} or <br>
-      data : {"_id" : "57d26068f2a81b5d740f695c"}
+      data : { "{{collection_names[i][1][0]}}" : "Some value" } or <br>
+      data : {"_id" : "57d26068f2a81b5d740f695c"}<br>
+      REST API URL : {{server_url}}/delete
     </div>
 
     <div class="ui segment update">
@@ -204,8 +232,9 @@
       <br>
       Data must be specified <br>
       Example: <br>
-      data : {_id : "57d25c9cf2a81b5d740f6956", newData : {x:5678, y:2222}} or <br>
-      data : {oldData: {y:2222}, newData : {z:5678, y:2222}}
+      data : {_id : "57d25c9cf2a81b5d740f6956", newData : { "{{collection_names[i][1][0]}}" : "Some value" } or <br>
+      data : {oldData: { "{{collection_names[i][1][0]}}" : "Some value" }, newData : { "{{collection_names[i][1][0]}}" : "Some value" }<br>
+      REST API URL : {{server_url}}/update
     </div>
   </div>
 </div>

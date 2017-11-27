@@ -64,7 +64,7 @@ app.get('/', function (req, res) {
 });
 
 // CRUD: Create
-app.get('/create', function (req, res) {
+app.post('/create', function (req, res) {
 
     if (typeof(req.body.collection) !== 'undefined' &&
         typeof(req.body.data) !== 'undefined') {

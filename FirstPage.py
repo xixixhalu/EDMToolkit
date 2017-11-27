@@ -50,9 +50,10 @@ def result():
     ana.DM_File_Analyze('Input', {'DM_Input_type': "Simple_XML"}, filename_str)
 
     #Parse JSON and generate code
-    element_names = GenerateCode.generate_all(filename_str)
+    element_names, server_url = GenerateCode.generate_all(filename_str)
 
     print element_names
+    print server_url
 
     #Convert collection names to dictionary for ID to name mapping
     dict_mapping = {}
@@ -66,6 +67,7 @@ def result():
 
     #Pass required data to the template
     description_data = {"collection_names":dict_mapping, "db_name":filename_str}
+    description_data["server_url"] = server_url
 
     print description_data
 
