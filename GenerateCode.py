@@ -4,7 +4,7 @@ from Utilities import portScanner
 
 def get_server_info():
     server_ip = "18.216.141.169"
-    port = portScanner.runPortScan(1000,9000)
+    port = portScanner.runPortScan(2000,9000)
     return server_ip, port
 
 
