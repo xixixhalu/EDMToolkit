@@ -3,8 +3,8 @@ from Utilities import portScanner
 
 
 def get_server_info():
-    server_ip = "18.216.141.169"
-    server_ip1 = "http://ec2-18-216-141-169.us-east-2.compute.amazonaws.com"
+    # server_ip = "18.216.141.169"
+    server_ip = "0.0.0.0"
     port = portScanner.runPortScan(2000,6000)
     return server_ip, port
 
