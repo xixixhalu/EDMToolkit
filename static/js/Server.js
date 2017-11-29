@@ -66,6 +66,10 @@ app.get('/', function (req, res) {
 // CRUD: Create
 app.post('/create', function (req, res) {
 
+    //TODO
+    //call the core.py authenticate service here. The "authenticate" service checks if the key and username are correct
+    //if incorrect then display error message
+
     if (typeof(req.body.collection) !== 'undefined' &&
         typeof(req.body.data) !== 'undefined') {
         var data = JSON.parse(req.body.data);
@@ -96,6 +100,11 @@ app.post('/create', function (req, res) {
 //CRUD: ReadOne
 //TODO: make sure the data is returned in JSON format
 app.post('/readOne', function (req, res) {
+
+    //TODO
+    //call the core.py authenticate service here. The "authenticate" service checks if the key and username are correct
+    //if incorrect then display error message
+
     if (typeof(req.body.collection) === 'undefined') {
         res.send({});
         return;
@@ -127,6 +136,11 @@ app.post('/readOne', function (req, res) {
 //CRUD: ReadAll
 //TODO: make sure the data is returned in JSON format
 app.post('/readAll', function (req, res) {
+
+    //TODO
+    //call the core.py authenticate service here. The "authenticate" service checks if the key and username are correct
+    //if incorrect then display error message
+
     if (typeof(req.body.collection) === 'undefined') {
         res.send([]);
         return;
@@ -146,6 +160,11 @@ app.post('/readAll', function (req, res) {
 
 //CRUD: Delete
 app.post('/delete', function (req, res) {
+
+    //TODO
+    //call the core.py authenticate service here. The "authenticate" service checks if the key and username are correct
+    //if incorrect then display error message
+
     if (typeof(req.body.collection) === 'undefined') {
         res.send();
         return;
@@ -179,6 +198,11 @@ app.post('/delete', function (req, res) {
 
 //CRUD: Update
 app.post('/update', function (req, res) {
+
+    //TODO
+    //call the core.py authenticate service here. The "authenticate" service checks if the key and username are correct
+    //if incorrect then display error message
+
     if (typeof(req.body.collection) === 'undefined' ||
         typeof(req.body.newData) === 'undefined') {
         res.send();

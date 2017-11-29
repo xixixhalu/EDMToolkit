@@ -17,6 +17,8 @@
       var collection_name = elem.getAttribute("name");
       alert(data);
       alert(collection_name);
+
+      //TODO : pass the authentication key and username to this function
       DBAdapter.createOne(collection_name, JSON.parse(data));
 
      }
@@ -25,6 +27,8 @@
     {
       var data1 = document.getElementById("data1"+i).value;
       var collection_name1 = elem.getAttribute("name");
+
+      //TODO : pass the authentication key and username to this function
       DBAdapter.createOne(collection_name1, JSON.parse(data1));
      }
 
@@ -32,6 +36,8 @@
     {
       var data2 = document.getElementById("data2"+i).value;
       var collection_name2 = elem.getAttribute("name");
+
+      //TODO : pass the authentication key and username to this function
       DBAdapter.readOne(collection_name2, JSON.parse(data2));
      }
 
@@ -39,6 +45,8 @@
     {
       var data3 = document.getElementById("data3"+i).value;
       var collection_name3 = elem.getAttribute("name");
+
+      //TODO : pass the authentication key and username to this function
       DBAdapter.readAll(collection_name3, JSON.parse(data3));
      }
 
@@ -46,6 +54,8 @@
     {
       var data4 = document.getElementById("data4"+i).value;
       var collection_name4 = elem.getAttribute("name");
+
+      //TODO : pass the authentication key and username to this function
       DBAdapter.delete(collection_name4, JSON.parse(data4));
      }
 
@@ -53,6 +63,8 @@
     {
       var data5 = document.getElementById("data5"+i).value;
       var collection_name5 = elem.getAttribute("name");
+
+      //TODO : pass the authentication key and username to this function
       DBAdapter.update(collection_name5, JSON.parse(data5));
      }
 
@@ -160,6 +172,11 @@
       {% endfor %}
       } <br>
       REST API URL : {{server_url}}/create
+
+      <!--TODO-->
+      <!--Include a password field for entering the key here.
+      This key will be used to authorize database access-->
+
     </div>
 
     <div class="ui segment crMany">
@@ -189,6 +206,10 @@
       }
       ]<br>
       REST API URL : {{server_url}}/create
+
+      <!--TODO-->
+      <!--Include a password field for entering the key here.
+      This key will be used to authorize database access-->
     </div>
 
     <div class="ui segment readOne">
@@ -200,6 +221,10 @@
       data : {"_id", "57d26068f2a81b5d740f695c"} or <br>
       data : { "{{collection_names[i][1][0]}}" : "Some value" } <br>
       REST API URL : {{server_url}}/readOne
+
+      <!--TODO-->
+      <!--Include a password field for entering the key here.
+      This key will be used to authorize database access-->
     </div>
 
     <div class="ui segment readAll">
@@ -211,6 +236,10 @@
       Example: <br>
       data : { "{{collection_names[i][1][0]}}" : "Some value" } <br>
       REST API URL : {{server_url}}/readAll
+
+      <!--TODO-->
+      <!--Include a password field for entering the key here.
+      This key will be used to authorize database access-->
     </div>
 
     <div class="ui segment delete">
@@ -223,6 +252,10 @@
       data : { "{{collection_names[i][1][0]}}" : "Some value" } or <br>
       data : {"_id" : "57d26068f2a81b5d740f695c"}<br>
       REST API URL : {{server_url}}/delete
+
+      <!--TODO-->
+      <!--Include a password field for entering the key here.
+      This key will be used to authorize database access-->
     </div>
 
     <div class="ui segment update">
@@ -235,6 +268,11 @@
       data : {_id : "57d25c9cf2a81b5d740f6956", newData : { "{{collection_names[i][1][0]}}" : "Some value" } or <br>
       data : {oldData: { "{{collection_names[i][1][0]}}" : "Some value" }, newData : { "{{collection_names[i][1][0]}}" : "Some value" }<br>
       REST API URL : {{server_url}}/update
+
+      <!--TODO-->
+      <!--Include a password field for entering the key here.
+      This key will be used to authorize database access-->
+
     </div>
   </div>
 </div>
