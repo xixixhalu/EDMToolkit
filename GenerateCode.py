@@ -3,10 +3,10 @@ from Utilities import portScanner
 
 
 def get_server_info():
-    # server_ip = "18.216.141.169"
+    display_ip = "18.216.141.169"
     server_ip = "0.0.0.0"
     port = portScanner.runPortScan(2000,6000)
-    return server_ip, port
+    return display_ip, server_ip, port
 
 
 """This method parses json input and replaces the
@@ -91,8 +91,8 @@ def generate_all(db_name):
     # reading json data
     with open("GeneratedCode/"+db_name+".json") as json_input:
         data = json.load(json_input)
-        server_ip, port = get_server_info()
+        display_ip, server_ip, port = get_server_info()
         element_names = generate_model(data, "Model")
         generate_adapter("Adapter", str(server_ip), str(port))
         generate_server("Server", str(server_ip), str(port), str(db_name))
-        return element_names, server_ip + ":" +str(port)
+        return element_names, display_ip + ":" +str(port)
