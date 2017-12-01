@@ -75,8 +75,8 @@ def result():
     print description_data
 
     #Start the node server here!
-    subprocess.call('forever start static/js/Server.js', shell=True)
-    print "Started Node Server"
+    # subprocess.call('forever start static/js/Server.js', shell=True)
+    # print "Started Node Server"
 
     #Render the template
     return render_template('result_page.html', **description_data)
