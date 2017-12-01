@@ -75,7 +75,7 @@ def result():
     print description_data
 
     #Start the node server here!
-    subprocess.call('sudo node static/js/Server.js', shell=True)
+    subprocess.call('node static/js/Server.js', shell=True)
     print "Started Node Server"
 
     #Render the template
