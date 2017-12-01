@@ -1,3 +1,6 @@
+#!/usr/bin/python
+import subprocess
+
 import os
 
 import GenerateCode
@@ -70,6 +73,9 @@ def result():
     description_data["server_url"] = server_url
 
     print description_data
+
+    #Start the server here!
+    subprocess.call('sudo node static/js/Server.js', shell=True)
 
     #Render the template
     return render_template('result_page.html', **description_data)
