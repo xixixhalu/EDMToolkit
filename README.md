@@ -3,6 +3,7 @@
 **_Please remember to branch off and merge later, do not commit on master_**
 
 ## Basic Structure
+- *Authentication* : Contains the authentication service that authorizes access to the REST API using a key associated with every user
 - *Backend* : All the functionalities that execute once the file has been uploaded to server
   - Parser : Parser module for the uploaded files
   - Errors : Custom error modules
