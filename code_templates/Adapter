@@ -151,7 +151,8 @@ DBAdapter.delete = function(collection, data) {
 function ajaxCall(operation, body) {
     alert("Came in the ajax call");
     alert(JSON.stringify(body));
-    alert(url+operation);
+    alert(url);
+    alert(operation);
     $.ajax({
         "url": url + operation,
         "method": "POST",
