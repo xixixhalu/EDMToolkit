@@ -82,5 +82,5 @@ def result():
     return render_template('result_page.html', **description_data)
 
 if __name__ == '__main__':
-    app.run()
-    #app.run(host="ec2-18-216-141-169.us-east-2.compute.amazonaws.com", port=5000)
+    #app.run()
+    app.run(host="ec2-18-216-141-169.us-east-2.compute.amazonaws.com", port=5000)
