@@ -25,8 +25,6 @@ var DBAdapter = {};
 // collection : "table1",
 // data : {"entity1" : 1}
 DBAdapter.createOne = function(collection, data1) {
-    alert("Came here??");
-
     alert(data1);
 
         var body = {
@@ -149,8 +147,6 @@ DBAdapter.delete = function(collection, data) {
 };
 
 function ajaxCall(operation, body) {
-    alert(operation);
-    alert("HI"+url);
     alert("Came in the ajax call");
     alert(JSON.stringify(body));
 
