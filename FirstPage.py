@@ -1,6 +1,3 @@
-#!/usr/bin/python
-import subprocess
-
 import os
 
 import GenerateCode
@@ -74,13 +71,8 @@ def result():
 
     print description_data
 
-    #Start the node server here!
-    # subprocess.call('forever start static/js/Server.js', shell=True)
-    # print "Started Node Server"
-
     #Render the template
     return render_template('result_page.html', **description_data)
 
 if __name__ == '__main__':
-    #app.run()
     app.run(host="ec2-18-216-141-169.us-east-2.compute.amazonaws.com", port=5000)
