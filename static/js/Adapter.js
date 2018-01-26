@@ -1,7 +1,7 @@
 // Change the url as required
 
-var server_ip = "localhost";
-var port = "1000";
+var server_ip = "0.0.0.0";
+var port = "2000";
 var url = "http://"+server_ip+":"+port+"/";
 
 function is_defined(x) {
@@ -149,8 +149,11 @@ DBAdapter.delete = function(collection, data) {
 };
 
 function ajaxCall(operation, body) {
-    alert("Came in the ajax call");
+    alert(operation);
+    alert("HI"+url);
+    alert("Came in the ajax callasasas");
     alert(JSON.stringify(body));
+
     $.ajax({
         "url": url + operation,
         "method": "POST",
