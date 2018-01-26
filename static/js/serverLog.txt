@@ -1,0 +1,24 @@
+App listening at http://0.0.0.0:2000
+Connected successfully to database
+error: Forever detected script was killed by signal: SIGKILL
+App listening at http://0.0.0.0:2000
+Connected successfully to database
+SyntaxError: Unexpected token u in JSON at position 0
+    at Object.parse (native)
+    at /home/rootedm/EDMToolkit/static/js/Server.js:136:21
+    at callbacks (/home/rootedm/EDMToolkit/static/js/node_modules/express/lib/router/index.js:164:37)
+    at param (/home/rootedm/EDMToolkit/static/js/node_modules/express/lib/router/index.js:138:11)
+    at pass (/home/rootedm/EDMToolkit/static/js/node_modules/express/lib/router/index.js:145:5)
+    at Router._dispatch (/home/rootedm/EDMToolkit/static/js/node_modules/express/lib/router/index.js:173:5)
+    at Object.router (/home/rootedm/EDMToolkit/static/js/node_modules/express/lib/router/index.js:33:10)
+    at next (/home/rootedm/EDMToolkit/static/js/node_modules/connect/lib/proto.js:174:15)
+    at Object.handle (/home/rootedm/EDMToolkit/static/js/Server.js:59:5)
+    at next (/home/rootedm/EDMToolkit/static/js/node_modules/connect/lib/proto.js:174:15)
+App listening at http://0.0.0.0:2000
+Connected successfully to database
+error: Forever detected script was killed by signal: SIGKILL
+App listening at http://0.0.0.0:2000
+Connected successfully to database
+error: Forever detected script was killed by signal: SIGKILL
+App listening at http://0.0.0.0:2000
+Connected successfully to database
